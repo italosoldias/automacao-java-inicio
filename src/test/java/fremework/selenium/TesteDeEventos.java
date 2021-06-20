@@ -11,7 +11,7 @@ import org.openqa.selenium.interactions.Actions;
 public class TesteDeEventos {
 	 public static   WebDriver driver;
 	 public static void main(String[] args) {
-		 testeDeTeclado	();
+		 testeBotaoDireito();
 	}
 
 	
@@ -51,5 +51,81 @@ public class TesteDeEventos {
 		act.keyUp(elementoEmail, Keys.SHIFT).build().perform();
 		act.sendKeys(elementoEmail, "ola ai ").build().perform();
 		
+	}
+	
+	
+	public static void testeMouse() {
+		
+		// setei o driver do chorme
+		driver = new ChromeDriver();
+		boolean textoSucesso;
+		boolean textoErro;
+		// caminho do driver
+
+		System.setProperty("webDriver.chorme.driver", "c:/autodrivers/chromedriver.exe");
+
+		Actions act = new Actions(driver);
+
+		driver.manage().window().maximize();
+		
+		driver.get("https://the-internet.herokuapp.com");
+		
+		
+		
+		
+		WebElement elementoTexto = driver.findElement(By.linkText("Form Authentication"));
+		act.click(elementoTexto).build().perform();
+		WebElement elementoEmail = driver.findElement(By.cssSelector("input[name='username']"));
+		WebElement elementoSenha = driver.findElement(By.id("password"));
+		WebElement elementoBotao = driver.findElement(By.cssSelector("button[type='submit']"));
+		
+		
+		
+		
+		act.sendKeys(elementoEmail, "tomsmith").build().perform();
+		act.doubleClick(elementoEmail).build().perform();
+		//act.keyDown(elementoSenha, Keys.SHIFT).build().perform();
+		act.sendKeys(elementoSenha, "SuperSecretPassword!").build().perform();
+		
+		act.click(elementoBotao).build().perform();
+		
+
+		//textoSucesso = driver.findElement(By.cssSelector("div[class='flash success']")).isDisplayed();
+		textoErro = driver.findElement(By.cssSelector("div[class='flash error']")).isDisplayed();
+		 //System.out.println(textoSucesso);
+		
+		
+		
+		if (textoErro == true) {
+			System.out.println("apareceu com sucesso");
+		} else  
+			System.out.println("tem algo de errado nisso");
+		
+		
+	
+	}
+	
+	
+	public static void testeBotaoDireito() {
+		
+		// setei o driver do chorme
+				driver = new ChromeDriver();
+				boolean textoSucesso;
+				boolean textoErro;
+				// caminho do driver
+
+				System.setProperty("webDriver.chorme.driver", "c:/autodrivers/chromedriver.exe");
+
+				Actions act = new Actions(driver);
+
+				driver.manage().window().maximize();
+				
+				driver.get("https://swisnl.github.io/jQuery-contextMenu/demo.html");
+				
+				WebElement botaoClick = driver.findElement(By.cssSelector("span.context-menu-one"));
+				act.contextClick(botaoClick).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN)
+				.sendKeys(Keys.ENTER).build().perform();
+				
+				
 	}
 }
